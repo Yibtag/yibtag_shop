@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>YIBTAG_SHOP</title>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="style.css">
+
+    <script defer>Date.prototype.customFormat = function(formatString){var YYYY,YY,MMMM,MMM,MM,M,DDDD,DDD,DD,D,hhhh,hhh,hh,h,mm,m,ss,s,ampm,AMPM,dMod,th;YY = ((YYYY=this.getFullYear())+"").slice(-2);MM = (M=this.getMonth()+1)<10?('0'+M):M;MMM = (MMMM=["January","February","March","April","May","June","July","August","September","October","November","December"][M-1]).substring(0,3);DD = (D=this.getDate())<10?('0'+D):D;DDD = (DDDD=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"][this.getDay()]).substring(0,3);th=(D>=10&&D<=20)?'th':((dMod=D%10)==1)?'st':(dMod==2)?'nd':(dMod==3)?'rd':'th';formatString = formatString.replace("#YYYY#",YYYY).replace("#YY#",YY).replace("#MMMM#",MMMM).replace("#MMM#",MMM).replace("#MM#",MM).replace("#M#",M).replace("#DDDD#",DDDD).replace("#DDD#",DDD).replace("#DD#",DD).replace("#D#",D).replace("#th#",th);h=(hhh=this.getHours());if (h==0) h=24;if (h>12) h-=12;hh = h<10?('0'+h):h;hhhh = hhh<10?('0'+hhh):hhh;AMPM=(ampm=hhh<12?'am':'pm').toUpperCase(); mm=(m=this.getMinutes())<10?('0'+m):m;ss=(s=this.getSeconds())<10?('0'+s):s;return formatString.replace("#hhhh#",hhhh).replace("#hhh#",hhh).replace("#hh#",hh).replace("#h#",h).replace("#mm#",mm).replace("#m#",m).replace("#ss#",ss).replace("#s#",s).replace("#ampm#",ampm).replace("#AMPM#",AMPM);};</script>
+    <script defer src="app.js"></script>
+
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</head>
+<body>
+    <div id="create-menu">
+        <input id="create-menu-item" type="text" placeholder="Item">
+        <input id="create-menu-price" type="number" step="0.1" placeholder="Price">
+        <input id="create-menu-amount" type="number" step="0.1" placeholder="Amount">
+        <button id="create-menu-create" onclick="CreateListing()">
+            Create
+        </button>
+    </div>
+    <div id="menu">
+        <div id="menu-sidebar">
+            <div id="sidebar-header">
+                <h1>Yibtag Market</h1>
+            </div>
+            <div id="sidebar-list">
+                <button class="sidebar-list-item" data-list-id="0" onclick="HandleSidebarItem(this)">
+                    <div class="sidebar-list-content">
+                        <ion-icon name="bag-outline"></ion-icon>
+                        Market
+                    </div>
+                </button>
+                <button class="sidebar-list-item" data-list-id="1" onclick="HandleSidebarItem(this)">
+                    <div class="sidebar-list-content">
+                        <ion-icon name="person-circle-outline"></ion-icon>
+                        Account
+                    </div>
+                </button>
+            </div>
+            <div id="sidebar-footer">
+                <button class="logout-button" onclick="MenuClose()">
+                    <div class="sidebar-footer-content">
+                        <ion-icon name="log-out-outline"></ion-icon>
+                        Logout
+                    </div>
+                </button>
+            </div>
+        </div>
+        <div id="menu-left">
+            <div id="menu-topbar">
+                <h2 id="topbar-header">
+                    Vehicle
+                </h2>
+                <div class="topbar-refresh">
+                    <button class="topbar-refresh-button" onclick="FetchCreate()">
+                        <ion-icon name="reload-circle-outline"></ion-icon>
+                    </button>
+                </div>
+                <div class="topbar-search">
+                    <input id="topbar-search-input" type="text" placeholder="Search">
+                </div>
+                <div class="topbar-sort">
+                    <select id="topbar-sort-selection">
+                        <option value="high-value">Highest value</option>
+                        <option value="low-value">Lowest value</option>
+                        <option value="newest">Newest</option>
+                        <option value="oldest">Oldest</option>
+                    </select>
+                </div>
+                <div class="topbar-create">
+                    <button class="topbar-create-button" onclick="OpenCreateMenu()">
+                        <div class="topbar-create-content">
+                            <ion-icon name="add-circle-outline"></ion-icon>
+                            Create
+                        </div>
+                    </button>
+                </div>
+            </div>
+            <div id="menu-items">
+            </div>
+        </div>
+    </div>
+</body>
+</html>
